@@ -1,1 +1,0 @@
-﻿select artista.nome, count from ex1, artista where artista.nome = ex1.nome and artista.paisorigem='Italia'
