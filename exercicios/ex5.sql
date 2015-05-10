@@ -1,4 +1,5 @@
 --Trigger CustoTotal
+-- Para lidar com esse problema, adicionaremos um comando "ON CASCADE" para "DELETE" e "UPDATE" na tabela "EMPRESTADO" que replicará as mudanças para a tabela "OBJETOS_ARTE". Nesta, o seguinte trigger será ativado e garantirá a consistência dos custos calculados
 
 CREATE FUNCTION atualiza_custo_total() RETURNS trigger AS $$
 	BEGIN
