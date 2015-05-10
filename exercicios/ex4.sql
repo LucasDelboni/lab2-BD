@@ -4,8 +4,6 @@ DROP FUNCTION remova_pintura();
 
 CREATE FUNCTION remova_pintura() RETURNS trigger AS $$
 	BEGIN
-		DELETE FROM PINTURA
-		WHERE Id_Objeto_Arte = OLD.Id_Objeto_Arte;
 		
 		DELETE FROM TIPO
 		WHERE Id_Objeto_Arte = OLD.Id_Objeto_Arte;
