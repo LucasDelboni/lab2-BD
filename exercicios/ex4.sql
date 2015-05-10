@@ -34,33 +34,40 @@ DROP FUNCTION atualiza_pintura();
 
 CREATE FUNCTION atualiza_pintura() RETURNS trigger AS $$
 	BEGIN
+		
+		SET session_replication_role = replica;
+		
 		UPDATE PINTURA
 		SET Id_Objeto_Arte = NEW.Id_Objeto_Arte
 		WHERE Id_Objeto_Arte = OLD.Id_Objeto_Arte;
 		
-		UPDATE FROM TIPO
+		UPDATE OBJETOS_ARTE
 		SET Id_Objeto_Arte = NEW.Id_Objeto_Arte
 		WHERE Id_Objeto_Arte = OLD.Id_Objeto_Arte;
 		
-		UPDATE FROM COLECAO_PERMANENTE
+		UPDATE TIPO
 		SET Id_Objeto_Arte = NEW.Id_Objeto_Arte
 		WHERE Id_Objeto_Arte = OLD.Id_Objeto_Arte;
 		
-		UPDATE FROM EMPRESTADO
+		UPDATE COLECAO_PERMANENTE
 		SET Id_Objeto_Arte = NEW.Id_Objeto_Arte
 		WHERE Id_Objeto_Arte = OLD.Id_Objeto_Arte;
 		
-		UPDATE FROM PROPRIEDADE
+		UPDATE EMPRESTADO
+		SET Id_Objeto_Arte = NEW.Id_Objeto_Arte
+		WHERE Id_Objeto_Arte = OLD.Id_Objeto_Arte;
+		
+		UPDATE PROPRIEDADE
 		SET Id_Objeto_Arte = NEW.Id_Objeto_Arte
 		WHERE Id_Objeto_Arte = OLD.Id_Objeto_Arte; 
 		
-		UPDATE FROM OBJETOS_ARTE
-		SET Id_Objeto_Arte = NEW.Id_Objeto_Arte
-		WHERE Id_Objeto_Arte = OLD.Id_Objeto_Arte;
+		
+		
+		SET session_replication_role = DEFAULT;
 		
 		RETURN NULL;
 	END;
 $$ LANGUAGE plpgsql;
 
-CREATE TRIGGER atualiza_pintura AFTER UPDATE ON PINTURA
+CREATE TRIGGER atualiza_pintura BEFORE UPDATE ON PINTURA
 FOR EACH ROW EXECUTE PROCEDURE atualiza_pintura();
