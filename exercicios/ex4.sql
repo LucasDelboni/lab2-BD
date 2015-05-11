@@ -1,3 +1,6 @@
+--Crie dois triggers que na ocorrência de uma remoção ou atualização do NumId de uma pintura, remova o objeto de arte ou 
+--atualize o NumId do objeto equivalente. 
+
 --trigger Remocao
 DROP TRIGGER remova_pintura ON PINTURA;
 DROP FUNCTION remova_pintura();

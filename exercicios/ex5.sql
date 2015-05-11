@@ -1,3 +1,9 @@
+--Dados o esquema de Bancos de Dados do Museu. Suponha que à tabela de Coleções foi adicionado um atributo Custo_Total 
+--que calcula a soma dos custos dos objetos de arte que pertencem a essa coleção e um atributo custo associado ao objeto emprestado. 
+--Já que esse campo é calculado a partir de dados existentes, isto é, os custos dos objetos emprestados que pertencem a essa coleção, 
+--ele precisa ser mantido para evitar inconsistências. Como você faria isso?
+
+
 --Trigger CustoTotal
 -- Para lidar com esse problema, adicionaremos um comando "ON CASCADE" para "DELETE" e "UPDATE" na tabela "EMPRESTADO" que replicará as mudanças para a tabela "OBJETOS_ARTE". Nesta, o seguinte trigger será ativado e garantirá a consistência dos custos calculados
 
